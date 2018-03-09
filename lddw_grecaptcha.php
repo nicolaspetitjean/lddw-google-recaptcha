@@ -21,10 +21,10 @@ class lddw_grecaptcha extends Module
     {
         $this->name = 'lddw_grecaptcha';
         $this->tab = 'front_office_features';
-        $this->version = '1.0.0';
+        $this->version = '1.0.1';
         $this->author = 'Nicolas PETITJEAN';
         $this->need_instance = 0;
-        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.6.18');
         $this->bootstrap = true;
 
         parent::__construct();
@@ -194,7 +194,7 @@ class lddw_grecaptcha extends Module
 
     public function getContent()
     {
-        $output = null;
+        $output = '';
 
         if(Tools::isSubmit('submit' . $this->name)) {
             $errors = array();
@@ -221,6 +221,11 @@ class lddw_grecaptcha extends Module
             } else {
                 $output = $this->displayError(implode("<br />", $errors));
             }
+
+            if(Configuration::get('PS_DISABLE_OVERRIDES')) {
+                $output .= $this->displayError(implode("<br />", array($this->l('This module require option "Disable overrides" to be inactive.'))));
+            }
+
         }
 
         return $output . $this->displayForm();
@@ -228,6 +233,10 @@ class lddw_grecaptcha extends Module
 
     public function displayForm()
     {
+        $output = '';
+        if(Configuration::get('PS_DISABLE_OVERRIDES')) {
+            $output .= $this->displayError(implode("<br />", array($this->l('This module require option "Disable overrides" to be inactive.'))));
+        }
         // Get default language
         $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
 
@@ -269,7 +278,8 @@ class lddw_grecaptcha extends Module
             'languages'    => $this->context->controller->getLanguages(),
             'id_language'  => $this->context->language->id
         );
+        $output .= $helper->generateForm($fields_form);
 
-        return $helper->generateForm($fields_form);
+        return $output;
     }
 }

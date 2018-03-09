@@ -2,7 +2,7 @@
 <module>
     <name>lddw_grecaptcha</name>
     <displayName><![CDATA[Google ReCaptcha]]></displayName>
-    <version><![CDATA[1.0]]></version>
+    <version><![CDATA[1.0.1]]></version>
     <description><![CDATA[Add the Google ReCaptcha fonctionnality in contact form.]]></description>
     <author><![CDATA[Nicolas PETITJEAN]]></author>
     <tab><![CDATA[front_office_features]]></tab>
