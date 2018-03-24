@@ -171,8 +171,6 @@ class lddw_grecaptcha extends Module
         }
         $this->context->controller->addCSS(($this->_path) . 'lddw_grecaptcha.css', 'all');
         $this->context->controller->addJS($this->_path . 'js/lddw_grecaptcha.js');
-        //$this->context->controller->registerJavascript('modules-js-lddw-cookies-law', 'modules/' . $this->name . '/js/lddw_cookieslaw.js', ['media' => 'all', 'priority' => 150]);
-        //$this->context->controller->registerStylesheet('modules-css-lddw-cookies-law', 'modules/' . $this->name . '/css/lddw_cookieslaw.css', ['media' => 'all', 'priority' => 150]);
     }
 
     public function hookOnSubmitContactForm()
